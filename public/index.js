@@ -144,6 +144,16 @@ const actors = [{
   }]
 }];
 
-console.log(truckers);
+function shippingPrice(array){
+  for(var i = 0; i < array.length; i ++){
+    array[i].price = array[i].volume + array[i].distance;
+  }
+
+  
+}
+
+shippingPrice(deliveries)
+
+//console.log(truckers);
 console.log(deliveries);
-console.log(actors);
+//console.log(actors);
