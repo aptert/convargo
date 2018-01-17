@@ -145,22 +145,34 @@ const actors = [{
 }];
 
 function shippingPrice(array){
-  for(var i = 0; i < array.length; i ++){
-    array[i].price = array[i].volume + array[i].distance;
+  for(var i = 0; i < array.length; i++){
+    var trucker = truckers.find(function(element){
+      return element.id == array[i].truckerId;
+    });
 
-    if (array[i].volume > 5){
-      array[i].price = array[i].price - (0.1 * array[i].price)
+    var distance = array[i].distance * trucker.pricePerKm;
+    var volume = array[i].volume * trucker.pricePerVolume
+    array[i].price = volume + distance;
+    //console.log("first price " + 0.3*array[i].price);
+
+    if (array[i].volume > 25){
+      var reduc = 0.5 * array[i].price
+      array[i].price -= reduc
     }
     else if(array[i].volume > 10){
-      array[i].price = array[i].price -(0.3 * array[i].price)
+      var reduc = 0.3 * array[i].price
+      array[i].price -= reduc
     }
-    else if(array[i].volume > 25){
-      array[i].price = array[i].price -(0.5 * array[i].price)
+    else if(array[i].volume > 5){
+      var reduc = 0.1 * array[i].price
+      array[i].price -= reduc
     }
+
   }
 
   
 }
+
 
 shippingPrice(deliveries)
 
