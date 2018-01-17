@@ -155,6 +155,8 @@ function shippingPrice(array){
     var volume = array[i].volume * trucker.pricePerVolume
     var reduc = 0;
 
+    //Volume parameter on the price computing 
+
     if (array[i].volume > 25){
       reduc = 0.5 * volume
     }
@@ -166,6 +168,12 @@ function shippingPrice(array){
     }
     array[i].price = (volume-reduc) + distance;
 
+    //Deductible reduction paramter on the price computing 
+
+    if (array[i].options.deductibleReduction == true){
+      var additionalCharge = array[i].volume
+      array[i].price += additionalCharge;  
+    }
     
   }
 }
@@ -184,6 +192,8 @@ function computePrice(deliveries){
     deliveries[i].commission.convargo = convargo;
   }
 }
+
+
 
 shippingPrice(deliveries)
 computePrice(deliveries)
