@@ -147,6 +147,16 @@ const actors = [{
 function shippingPrice(array){
   for(var i = 0; i < array.length; i ++){
     array[i].price = array[i].volume + array[i].distance;
+
+    if (array[i].volume > 5){
+      array[i].price = array[i].price - (0.1 * array[i].price)
+    }
+    else if(array[i].volume > 10){
+      array[i].price = array[i].price -(0.3 * array[i].price)
+    }
+    else if(array[i].volume > 25){
+      array[i].price = array[i].price -(0.5 * array[i].price)
+    }
   }
 
   
