@@ -149,32 +149,44 @@ function shippingPrice(array){
     var trucker = truckers.find(function(element){
       return element.id == array[i].truckerId;
     });
-
+    
+    
     var distance = array[i].distance * trucker.pricePerKm;
     var volume = array[i].volume * trucker.pricePerVolume
-    array[i].price = volume + distance;
-    //console.log("first price " + 0.3*array[i].price);
+    var reduc = 0;
 
     if (array[i].volume > 25){
-      var reduc = 0.5 * array[i].price
-      array[i].price -= reduc
+      reduc = 0.5 * volume
     }
     else if(array[i].volume > 10){
-      var reduc = 0.3 * array[i].price
-      array[i].price -= reduc
+      reduc = 0.3 * volume
     }
     else if(array[i].volume > 5){
-      var reduc = 0.1 * array[i].price
-      array[i].price -= reduc
+      reduc = 0.1 * volume
     }
+    array[i].price = (volume-reduc) + distance;
 
+    
   }
-
-  
 }
 
 
+function computePrice(deliveries){
+  for(var i =0; i<deliveries.length;i++){
+    var commission = deliveries[i].price * 0.3
+    var insurance = commission / 2
+    deliveries[i].commission.insurance = insurance
+
+    var treasury = Math.floor(deliveries[i].distance/500);
+    deliveries[i].commission.treasury = treasury + 1;
+
+    var convargo = insurance - treasury;
+    deliveries[i].commission.convargo = convargo;
+  }
+}
+
 shippingPrice(deliveries)
+computePrice(deliveries)
 
 //console.log(truckers);
 console.log(deliveries);
