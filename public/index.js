@@ -195,11 +195,6 @@ function computePrice(deliveries){
 
 //Computes credits and debits between actors 
 function computeTransaction(actors){
-  /*for(var i =0; i<actors.length;i++){
-    var delivery = deliveries.find(function(element){
-      return actors[i].deliveryId == element.id;
-    });    
-  }*/
 }
 
 
