@@ -171,7 +171,7 @@ function shippingPrice(array){
     //Deductible reduction paramter on the price computing 
 
     if (array[i].options.deductibleReduction == true){
-      var additionalCharge = array[i].volume
+      var additionalCharge = Math.floor(array[i].volume);
       array[i].price += additionalCharge;  
     }
     
@@ -195,31 +195,11 @@ function computePrice(deliveries){
 
 //Computes credits and debits between actors 
 function computeTransaction(actors){
-  for(var i =0; i<actors.length;i++){
+  /*for(var i =0; i<actors.length;i++){
     var delivery = deliveries.find(function(element){
       return actors[i].deliveryId == element.id;
     });    
-
-    switch(actors[i].payment.who){
-      case "shipper":
-        actors[i].payment.amount = 1;
-        break;
-      case "owner":
-        actors[i].payment.amount = 1;
-        break;
-      case "insurance":
-        actors[i].payment.amount = 1;
-        break;
-      case "treasury":
-        actors[i].payment.amount = 1;
-        break;
-      case "convargo":
-        actors[i].payment.amount = 1;
-        break;
-
-    }
-
-  }
+  }*/
 }
 
 
@@ -228,6 +208,6 @@ shippingPrice(deliveries)
 computePrice(deliveries)
 computeTransaction(actors);
 
-//console.log(truckers);
-//console.log(deliveries);
+console.log(truckers);
+console.log(deliveries);
 console.log(actors);
